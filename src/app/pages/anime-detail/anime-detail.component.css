@@ -27,6 +27,14 @@
     min-height: 140px;
 }
 
+.gender{
+    border-radius: 16px;
+    background-color: black;
+    color: white;
+    padding: 4px 6px;
+    margin-right: 5px;
+}
+
 
 @media(max-width:576px ){
     .sm-invisible {
