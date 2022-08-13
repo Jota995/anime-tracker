@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "deploy-gh":"ng build --base-href 'https://jota995.github.io/anime-tracker/'"
   },
   "private": true,
   "dependencies": {
