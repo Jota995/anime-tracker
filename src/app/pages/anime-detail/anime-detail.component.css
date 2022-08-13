@@ -1,0 +1,38 @@
+.text{
+    font-weight: 700;
+}
+
+.information i{
+    margin-right: 5px;
+}
+
+.information span{
+    font-size: 18px;
+}
+
+.information-wrapper{
+    padding: 0 10px 0 10px;
+}
+
+.first-section{
+    padding: 0;
+}
+
+.title{
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.character-card{
+    min-height: 140px;
+}
+
+
+@media(max-width:576px ){
+    .sm-invisible {
+        display:none;
+    }
+    .anime-img{
+        width: 280px;
+    }
+}

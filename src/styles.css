@@ -1,1 +1,50 @@
 /* You can add global styles to this file, and also import other style files */
+* {
+	box-sizing: border-box;
+	font-family: 'Fira Sans', sans-serif;
+}
+body {
+	background-color: #EEE;
+	width: 100%;
+	padding: 1.5rem;
+}
+form {
+	display: flex;
+}
+form input {
+	appearance: none;
+	outline: none;
+	border: none;
+	background: white;
+	display: block;
+	color: #888;
+	font-size: 1.125rem;
+	padding: 0.5rem 1rem;
+	width: 100%;
+}
+.button {
+	appearance: none;
+	outline: none;
+	border: none;
+	background: none;
+	cursor: pointer;
+	display: block;
+	padding: 0.2rem 0.8rem;
+	background-image: linear-gradient(to right, deeppink 50%, darkviolet 50%);
+	background-size: 200%;
+	color: white;
+	font-size: 0.95rem;
+	font-weight: bold;
+	text-transform: uppercase;
+	transition: 0.4s;
+}
+.button:hover {
+	background-position: right;
+}
+
+hr {
+	margin-top: 5px;
+	margin-bottom: 5px;
+	border: 0;
+	border-top: 1px solid black;
+  }

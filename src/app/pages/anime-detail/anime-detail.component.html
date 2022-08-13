@@ -1,0 +1,136 @@
+<div class="row m-0 p-0" *ngIf="anime">
+    <div class="col-12 first-section">
+        <div class="row">
+            <div class="col-xl-2 col-lg-3 col-md-3 col-sm-12 col-12">
+                <div class="row">
+                     <div class="col-12 p-2 text-center">
+                         <img class="rounded shadow-sm anime-img" [src]="anime.images['jpg'].image_url" width="100%" [alt]="anime.title">
+                     </div>
+                </div>
+                <div class="row sm-invisible">
+                    <div class="col-12 p-2">
+                        <div class="card">
+                            <div class="card-header d-flex align-items-center information">
+                                <i class="bi bi-card-heading"></i>
+                                <span>Alternative Titles</span>
+                            </div>
+                            <div class="card-body">
+                                <div class="row" *ngIf="anime.title_english">
+                                    <div class="col-12">
+                                        <span class="text">English: </span>{{anime.title_english}}
+                                    </div>
+                                </div>
+                                <div class="row" *ngIf="anime.title_japanese">
+                                    <div class="col-12">
+                                        <span class="text">Japanese: </span>{{anime.title_japanese}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row sm-invisible">
+                    <div class="col-12 p-2">
+                        <div class="card">
+                            <div class="card-header d-flex align-items-center information">
+                                <i class="bi bi-card-heading"></i>
+                                <span>Episodes Information</span>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <span class="text">Episodes: </span>{{anime.episodes || 'unknown'}}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <span class="text">Duration: </span>{{anime.duration || 'unknown'}}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <span class="text">Broadcast: </span>{{anime.broadcast.string || 'unknown'}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-10 col-lg-9 col-md-9 col-sm-12 col-12 information-wrapper">
+                <div class="card">
+                    <div class="card-body">
+                        <span class="title">{{anime.title}}</span>
+                    </div>
+                </div>
+    
+                <div class="card mt-3">
+                    <div class="card-header d-flex align-items-center information">
+                        <i class="bi bi-info-square"></i><span>General Information</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="row mb-2">
+                            <div class="col-4 col-sm-4 col-md-4 col-lg-2 col-xl-2"><span class="text">Year</span></div>
+                            <div class="col-8 col-sm-8 col-md-8 col-lg-10 col-xl-10">{{anime.year || 'unknown'}}</div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-4 col-sm-4 col-md-4 col-lg-2 col-xl-2"><span class="text">Season</span></div>
+                            <div class="col-8 col-sm-8 col-md-8 col-lg-10 col-xl-10">{{anime.season || 'unknown'}}</div>
+                        </div>
+                        <div class="row mb-2 mt-2">
+                            <div class="col-4 col-sm-4 col-md-4 col-lg-2 col-xl-2"><span class="text">Status</span></div>
+                            <div class="col-8 col-sm-8 col-md-8 col-lg-10 col-xl-10">{{anime.status || 'unknown'}}</div>
+                        </div>
+                        <div class="row mb-2 mt-2">
+                            <div class="col-4 col-sm-4 col-md-4 col-lg-2 col-xl-2"><span class="text">Type</span></div>
+                            <div class="col-8 col-sm-8 col-md-8 col-lg-10 col-xl-10">{{anime.type || 'unknown'}}</div>
+                        </div>
+                        <div class="row mt-2 mb-2">
+                            <div class="col-4 col-sm-4 col-md-4 col-lg-2 col-xl-2"><span class="text">Genres</span></div>
+                            <div class="col-8 col-sm-8 col-md-8 col-lg-10 col-xl-10">
+                                <span class="gender" *ngFor="let gender of anime.genres">{{gender.name}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="card mt-3">
+                    <div class="card-header d-flex align-items-center information">
+                        <i class="bi bi-journal-text"></i>
+                        <span>Synopsis</span>
+                    </div>
+                    <div class="card-body">
+                        {{anime.synopsis}}
+                    </div>
+                </div>
+    
+                <div class="card mt-3">
+                    <div class="card-header d-flex align-items-center information">
+                        <i class="bi bi-person-square"></i><span>Characters</span>
+                    </div>
+                    <div class="card-body">
+                        <ng-container *ngIf="animeCharacters.length > 0">
+                            <div class="row">
+                                <div class="col-12 m-0 p-2 col-xl-3 col-lg-4 col-md-4 col-sm-6" *ngFor="let character of animeCharacters">
+                                    <div class="card character-card">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-4">
+                                                    <img [src]="character.character.images['webp'].image_url" width="100%" height="120" alt="{{character.character.name}}">
+                                                </div>
+                                                <div class="col-8">
+                                                    <p><b>Name</b>: {{character.character.name}}</p>
+                                                    <p><b>Role</b>: {{character.role}}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> 
+                        </ng-container>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

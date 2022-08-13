@@ -1,0 +1,72 @@
+.results{
+    width: 100%;
+    margin: 0 auto;
+}
+
+.result{
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 8px black;
+  display: flex;
+  width: 100%;
+  z-index: 0;
+}
+
+.result .details{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 100%;
+    padding-right: 10px;
+}
+
+.details .genders{
+}
+
+.details .genders .gender{
+    border-radius: 16px;
+    background-color: black;
+    color: white;
+    padding: 4px 6px;
+    margin-right: 5px;
+}
+
+.anime-image{
+    position: relative;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.anime-image .anime-type{
+    position: absolute;
+    border-radius: 16px;
+    min-width: 50px;
+    background-color: rgb(112, 112, 112);
+    color: white;
+    font-weight: 500;
+    padding: 8px 8px;
+    text-align: center;
+}
+
+.anime-image img{
+    height: 160px;
+    width: 120px;
+    border-radius: 10px;
+}
+
+.synopsis{
+    margin: 0;
+    font-size: 14px;
+}
+
+.anime-title{
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+    color: black;
+}
+
+.anime-title:hover{
+    text-decoration: underline;
+    
+}
