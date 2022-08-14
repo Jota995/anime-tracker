@@ -14,7 +14,6 @@ export class ResultAnimeComponent implements OnInit {
   constructor(private animeService:AnimeService) { }
 
   ngOnInit(): void {
-   
   }
 
   addToMyAnimeList(anime:Anime){
