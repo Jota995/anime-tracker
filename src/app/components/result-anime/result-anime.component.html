@@ -7,7 +7,7 @@
             </div>
             <div class="details">
                 <a routerLink="/anime-detail/{{anime.mal_id}}" class="anime-title">{{anime.title | slice:0:40}}<span *ngIf="anime.title.length > 40">...</span></a>
-                <p class="synopsis">{{anime.synopsis | slice:0:60}}<span *ngIf="anime.synopsis.length > 60">...</span></p>
+                <p *ngIf="anime.synopsis" class="synopsis">{{anime.synopsis | slice:0:60}}<span *ngIf="anime.synopsis.length > 60">...</span></p>
                 <div class="genders">
                     <small class="gender" *ngFor="let gender of anime.genres.slice(0,2)">{{gender.name}}</small>
                 </div>

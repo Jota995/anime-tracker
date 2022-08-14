@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Observable, BehaviorSubject, Subject } from 'rxjs';
 import { map , tap} from 'rxjs/operators';
 import { Anime, APIAnime, CharacterAnime, MyAnime } from '../interfaces/api-anime';
 
@@ -11,10 +11,9 @@ export class AnimeService {
 
   private API_URL = "https://api.jikan.moe/v4/anime";
 
-  private anime_response$ = new Subject<Array<Anime>>();
+  private anime_response$ = new BehaviorSubject<Array<Anime>>([]);
 
   private anime_selected$ = new Subject<MyAnime>();
-
 
   constructor(private http:HttpClient) { }
 
@@ -44,7 +43,6 @@ export class AnimeService {
 
   getAnimeById(id:string | null):Observable<any>{
     return this.http.get<any>(`${this.API_URL}/${id}`).pipe(
-      tap(console.log),
       map((result:any) => {
         return result.data
       })
@@ -53,7 +51,6 @@ export class AnimeService {
 
   getAnimeCharacters(id:string | null):Observable<Array<CharacterAnime>>{
     return this.http.get<any>(`${this.API_URL}/${id}/characters`).pipe(
-      tap(console.log),
       map((result:any) => {
         return result.data
       })
