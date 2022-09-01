@@ -10,6 +10,10 @@ const routes: Routes = [
     component:AnimeSearchComponent
   },
   {
+    path: 'browse-anime',
+    component:AnimeSearchComponent
+  },
+  {
     path: 'anime-detail/:animeId',
     component: AnimeDetailComponent
   }

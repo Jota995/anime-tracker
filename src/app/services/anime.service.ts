@@ -11,7 +11,7 @@ export class AnimeService {
 
   private API_URL = "https://api.jikan.moe/v4/anime";
 
-  private anime_response$ = new BehaviorSubject<Array<Anime>>([]);
+  private anime_response$ = new Subject<Array<Anime>>();
 
   private anime_selected$ = new Subject<MyAnime>();
 
