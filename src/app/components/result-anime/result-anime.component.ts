@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { Anime, MyAnime } from 'src/app/interfaces/api-anime';
 import { AnimeService } from 'src/app/services/anime.service';
 
@@ -7,13 +8,26 @@ import { AnimeService } from 'src/app/services/anime.service';
   templateUrl: './result-anime.component.html',
   styleUrls: ['./result-anime.component.css']
 })
-export class ResultAnimeComponent implements OnInit {
+export class ResultAnimeComponent implements OnInit, OnDestroy {
+
+  subs:Subscription = new Subscription();
 
   ResultAnimes$ = this.animeService.getResultAnime()
+
+  isLoading:boolean = false;
+
+  resultAnimes!:Anime[];
 
   constructor(private animeService:AnimeService) { }
 
   ngOnInit(): void {
+
+    this.subs.add(this.animeService.is_loading.subscribe(result => this.isLoading = result))
+    this.subs.add(this.ResultAnimes$.subscribe(data => this.resultAnimes = data))
+  }
+
+  ngOnDestroy(): void {
+    this.subs.unsubscribe()
   }
 
   addToMyAnimeList(anime:Anime){
