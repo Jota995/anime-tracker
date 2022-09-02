@@ -1,4 +1,4 @@
-<div class="row m-0 p-0" *ngIf="anime">
+<div class="row m-0 p-0" *ngIf="(anime$ | async) as anime; else cargando">
     <div class="col-12 first-section">
         <div class="row">
             <div class="col-xl-2 col-lg-3 col-md-3 col-sm-12 col-12">
@@ -109,7 +109,7 @@
                         <i class="bi bi-person-square"></i><span>Characters</span>
                     </div>
                     <div class="card-body">
-                        <ng-container *ngIf="animeCharacters.length > 0">
+                        <ng-container *ngIf="(characters$ | async) as animeCharacters ; else cargando">
                             <div class="row">
                                 <div class="col-12 m-0 p-2 col-xl-3 col-lg-4 col-md-4 col-sm-6" *ngFor="let character of animeCharacters">
                                     <div class="card character-card">
@@ -134,3 +134,11 @@
         </div>
     </div>
 </div>
+
+<ng-template #cargando>
+    <div class="text-center">
+        <div class="spinner-border text-center" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+</ng-template>

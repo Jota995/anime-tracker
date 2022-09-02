@@ -9,25 +9,14 @@ import { AnimeService } from 'src/app/services/anime.service';
   templateUrl: './anime-detail.component.html',
   styleUrls: ['./anime-detail.component.css']
 })
-export class AnimeDetailComponent implements OnInit, OnDestroy {
-  private subs!:Subscription;
-  anime!:any
+export class AnimeDetailComponent implements OnInit {
   animeId:string | null = this.route.snapshot.paramMap.get('animeId');
-  animeCharacters!:Array<any>
+  anime$ = this.animeService.getAnimeById(this.animeId)
+  characters$ = this.animeService.getAnimeCharacters(this.animeId)
 
   constructor(private animeService:AnimeService, private route:ActivatedRoute) { }
 
   ngOnInit(): void {
-
-    this.subs = combineLatest([this.animeService.getAnimeById(this.animeId),this.animeService.getAnimeCharacters(this.animeId)])
-      .subscribe(([animeResult, charctersResult]) =>{
-        this.anime = animeResult;
-        this.animeCharacters = charctersResult;
-      })
-  }
-
-  ngOnDestroy(): void {
-    this.subs.unsubscribe()
   }
 
 }

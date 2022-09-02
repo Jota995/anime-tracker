@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject, Subject } from 'rxjs';
-import { map , tap} from 'rxjs/operators';
+import { finalize, map , tap} from 'rxjs/operators';
 import { Anime, APIAnime, CharacterAnime, MyAnime } from '../interfaces/api-anime';
 
 @Injectable({
@@ -15,13 +15,17 @@ export class AnimeService {
 
   private anime_selected$ = new Subject<MyAnime>();
 
+  public is_loading = new BehaviorSubject<boolean>(false);
+
   constructor(private http:HttpClient) { }
 
   getAnimes(searchTerm:string):Observable<Array<Anime>>{
+    this.is_loading.next(true)
     return this.http.get<APIAnime>(`${this.API_URL}?q=${searchTerm}`).pipe(
       map((result:APIAnime) =>{
         return result.data
-      })
+      }),
+      finalize(() => this.is_loading.next(false ))
     )
   }
 
@@ -42,18 +46,22 @@ export class AnimeService {
   }
 
   getAnimeById(id:string | null):Observable<any>{
+    this.is_loading.next(true)
     return this.http.get<any>(`${this.API_URL}/${id}`).pipe(
       map((result:any) => {
         return result.data
-      })
+      }),
+      finalize(() => this.is_loading.next(false ))
     )
   }
 
   getAnimeCharacters(id:string | null):Observable<Array<CharacterAnime>>{
+    this.is_loading.next(true)
     return this.http.get<any>(`${this.API_URL}/${id}/characters`).pipe(
       map((result:any) => {
         return result.data
-      })
+      }),
+      finalize(() => this.is_loading.next(false ))
     )
   }
 
