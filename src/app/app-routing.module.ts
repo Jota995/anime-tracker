@@ -1,21 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router'
-import {AnimeDetailComponent} from "./pages/anime-detail/anime-detail.component"
-import {AnimeSearchComponent} from "./pages/anime-search/anime-search.component"
 
 const routes: Routes = [
   {
     path: '',
-    component:AnimeSearchComponent
-  },
-  {
-    path: 'browse-anime',
-    component:AnimeSearchComponent
+    loadChildren: () => import('./pages/anime-search/anime-search.module').then(m => m.AnimeSearchModule)
   },
   {
     path: 'anime-detail/:animeId',
-    component: AnimeDetailComponent
+    loadChildren: () => import('./pages/anime-detail/anime-detail.module').then(m => m.AnimeDetailModule)
   }
 ]
 
