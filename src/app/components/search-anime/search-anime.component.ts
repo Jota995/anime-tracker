@@ -1,8 +1,17 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, Subscription, firstValueFrom, filter,distinct} from 'rxjs';
+import { firstValueFrom, filter,distinct, Subject, takeUntil} from 'rxjs';
+import { AnimeStatus } from 'src/app/enums/anime-status';
 import { Anime } from 'src/app/interfaces/api-anime';
 import { AnimeService } from 'src/app/services/anime.service';
+import { AnimeType } from 'src/app/enums/anime-type';
+import { FormBuilder, FormGroup } from '@angular/forms';
+
+export interface SearchFilter{
+  status:AnimeStatus,
+  type:AnimeType,
+  q: string
+}
 
 @Component({
   selector: 'app-search-anime',
@@ -12,37 +21,69 @@ import { AnimeService } from 'src/app/services/anime.service';
 export class SearchAnimeComponent implements OnInit, OnDestroy {
 
   searchTerm!:string;
-
-  private subs:Subscription = new Subscription();
+  searchFilter!:SearchFilter;
+  form!:FormGroup;
+  private destroy$:Subject<boolean> = new Subject<boolean>();
 
   constructor(
     private animeService:AnimeService,
     private router:Router,
-    private activateRoute:ActivatedRoute
+    private activateRoute:ActivatedRoute,
+    private fb:FormBuilder
   ) { }
 
   ngOnInit(): void {
-    this.subs = this.activateRoute
+    this.form = this.buildForm()
+    this.activateRoute
       .queryParamMap
       .pipe(
-        filter(data => data.get('anime') != undefined && data.get('anime')!.length > 1),
+        takeUntil(this.destroy$),
+        filter(data => data.get('q') != undefined && data.get('q')!.length > 1),
         distinct()
       )
       .subscribe(async (param) =>{
-        await firstValueFrom(this.animeService.getAnimes(param.get('anime')?.trim() || ''))
+        this.searchFilter = {
+          status: param.get('status') as AnimeStatus || '',
+          type: param.get('type') as AnimeType || '',
+          q: param.get('q')?.trim() as string || ''
+        }
+
+        this.form.patchValue(this.searchFilter)
+        await firstValueFrom(this.animeService.getAnimes(this.searchFilter))
           .then((result:Array<Anime>) =>{
+            console.log("anime result",result)
             this.animeService.addResultAnime(result || []);
-            this.searchTerm = param.get('anime')?.trim() || ''
+            this.searchTerm = param.get('q')?.trim() || ''
           })
       })
   }
 
   ngOnDestroy(): void {
-    this.subs.unsubscribe();
+    this.destroy$.next(true);
+    this.destroy$.complete();
+  }
+
+  buildForm(){
+    const form = this.fb.group({
+      q:[null],
+      type:[null],
+      status:[null],
+      score:[null],
+      rated:[null],
+      producers:[null],
+      start_date:[null],
+      end_date:[null]
+    })
+
+    return form
   }
 
   searchAnime(){
-    this.router.navigate(['/browse-anime'],{queryParams:{anime:this.searchTerm.trim()}})
+    console.log("form",this.form.getRawValue())
+    this.form.patchValue({
+      q:this.searchTerm
+    })
+    this.router.navigate(['/browse-anime'],{queryParams:this.form.getRawValue()})
   }
 
 

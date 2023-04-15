@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject, Subject } from 'rxjs';
 import { finalize, map , tap} from 'rxjs/operators';
 import { Anime, APIAnime, CharacterAnime, MyAnime } from '../interfaces/api-anime';
+import { SearchFilter } from '../components/search-anime/search-anime.component';
 
 @Injectable({
   providedIn: 'root'
@@ -19,9 +20,10 @@ export class AnimeService {
 
   constructor(private http:HttpClient) { }
 
-  getAnimes(searchTerm:string):Observable<Array<Anime>>{
+  getAnimes(search:SearchFilter):Observable<Array<Anime>>{
+    console.log("service",search)
     this.is_loading.next(true)
-    return this.http.get<APIAnime>(`${this.API_URL}?q=${searchTerm}`).pipe(
+    return this.http.get<APIAnime>(`${this.API_URL}?q=${search.q}&status=${search.status}&type=${search.type}`).pipe(
       map((result:APIAnime) =>{
         return result.data
       }),

@@ -1,0 +1,83 @@
+<form class="row" [formGroup]="form">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-12 d-flex justify-content-between">
+                <div>Filtros</div>
+                <div>Limpiar Filtros</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-auto">
+                <label class="col-form-label">Type</label>
+            </div>
+            <div class="col-auto">
+                <select formControlName="type" class="form-select" aria-label="Default select example">
+                    <option value="null" disabled selected>Select a type</option>
+                    <option *ngFor="let value of animeType" [value]="value">{{value}}</option>
+                </select>
+            </div>            
+        </div>
+        <div class="row">
+            <div class="col-auto">
+                <label class="col-form-label">Status</label>
+            </div>
+            <div class="col-auto">
+                <select formControlName="status" class="form-select" aria-label="Default select example">
+                    <option value="null" disabled selected>Select a status</option>
+                    <option *ngFor="let value of animeStatus" [value]="value">{{value}}</option>
+                </select>
+            </div>            
+        </div>
+        <div class="row">
+            <div class="col-auto">
+                <label class="col-form-label">Score</label>
+            </div>
+            <div class="col-auto">
+                <select formControlName="score" class="form-select" aria-label="Default select example">
+                    <option value="null" disabled selected>Select a score</option>
+                    <option *ngFor="let score of scores" [value]="score.index">{{ score.index }} - {{ score.value }}</option>
+                </select>
+            </div>            
+        </div>
+        <div class="row">
+            <div class="col-auto">
+                <label class="col-form-label">Rated</label>
+            </div>
+            <div class="col-auto">
+                <select formControlName="rated" class="form-select" aria-label="Default select example">
+                    <option value="null" disabled selected>Select a rated</option>
+                    <option *ngFor="let value of animeRatings" [value]="value">{{value}}</option>
+                </select>
+            </div>            
+        </div>
+        <div class="row">
+            <div class="col-auto">
+                <label class="col-form-label">Producers</label>
+            </div>
+            <div class="col-auto">
+                <select formControlName="producers" class="form-select" aria-label="Default select example">
+                    <option value="null" disabled selected>Select a producer</option>
+                    <option *ngFor="let value of animeProducers" [value]="value.titles[0].title">{{value.titles[0].title}}</option>
+                </select>
+            </div>            
+        </div>
+        <div class="row">
+            <div class="col-auto">
+                <label class="col-form-label">Start date</label>
+            </div>
+            <div class="col-auto">
+                <input type="date" formControlName="start_date" class="form-control">
+            </div>            
+        </div>
+        <div class="row">
+            <div class="col-auto">
+                <label class="col-form-label">End date</label>
+            </div>
+            <div class="col-auto">
+                <input type="date" formControlName="end_date" class="form-control">
+            </div>            
+        </div>
+    </div>
+</form>

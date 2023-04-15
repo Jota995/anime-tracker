@@ -17,8 +17,7 @@ import { SearchAnimeModule } from 'src/app/components/search-anime/search-anime.
     AnimeSearchRoutingModule,
     ResultAnimeModule,
     SelectedAnimeModule,
-    SearchAnimeModule
-
+    SearchAnimeModule,
   ],
   exports:[
   ]

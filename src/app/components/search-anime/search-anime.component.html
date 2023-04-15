@@ -1,4 +1,5 @@
 <form (ngSubmit)="searchAnime()" class="search-form">
     <input type="text" placeholder="search for an anime" name="search" [(ngModel)]="searchTerm">
     <button type="submit" class="button">Search Anime</button>
+    <app-search-filter [form]="form"></app-search-filter>
 </form>

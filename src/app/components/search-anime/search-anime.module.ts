@@ -1,18 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SearchAnimeComponent } from './search-anime.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SearchFilterComponent } from './components/search-filter/search-filter.component';
 
 
 
 @NgModule({
-  declarations: [SearchAnimeComponent],
+  declarations: [SearchAnimeComponent, SearchFilterComponent],
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports:[
-    SearchAnimeComponent
+    SearchAnimeComponent,
+    SearchFilterComponent
   ]
 })
 export class SearchAnimeModule { }
